@@ -199,6 +199,7 @@ nonunified_source_files = [
   "RewriteTexelFetchOffset.cpp",
   "RewriteUnaryMinusOperatorInt.cpp",
   "ShaderLang.cpp",
+  "SwapChain11.cpp",
   "SystemInfo.cpp",
   "SystemInfo_win.cpp",
   "copyimage.cpp",
