@@ -90,7 +90,7 @@ FINAL_LIBRARY = 'gkmedias'
 #
   'libANGLE': """
 
-LOCAL_INCLUDES += [ '../../include', '../../src', '../../src/common/third_party/numerics', '../../src/third_party/khronos' ]
+LOCAL_INCLUDES += [ '../../include', '../../src', '../../src/common/third_party/numerics', '../../src/third_party/khronos', '../../src/third_party/mrucache' ]
 
 DEFINES['LIBANGLE_IMPLEMENTATION'] = "1"
 DEFINES['ANGLE_ENABLE_HLSL'] = "1"
