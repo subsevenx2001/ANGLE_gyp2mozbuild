@@ -8,9 +8,9 @@ How to use it
 3. Execute gyp_mozbuild
 4. Manually fix moz.build under /path/to/ANGLE/src/libANGLE
 
-  (1) Move '../third_party/systeminfo/SystemInfo.cpp' from SOURCES to UNIFIED_SOURCE above.
-  (2) Move 'renderer/d3d/d3d11/win32/NativeWindow11Win32.cpp' from UNIFIED_SOURCE to SOURCE below
-  
+--(1) Move '../third_party/systeminfo/SystemInfo.cpp' from SOURCES to UNIFIED_SOURCE above.
+--(2) Move 'renderer/d3d/d3d11/win32/NativeWindow11Win32.cpp' from UNIFIED_SOURCE to SOURCE below
+
 5. rm -rf /path/to/gecko/gfx/angle
 6. mkdir -p /path/to/gecko/gfx/angle
 7. cp -r /path/to/ANGLE/[A-Z]* /path/to/ANGLE/{include,src,moz.build} /path/to/gecko/gfx/angle
