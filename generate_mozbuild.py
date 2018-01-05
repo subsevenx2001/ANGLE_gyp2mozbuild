@@ -21,15 +21,16 @@ footers = {
 # common -- appears in all of the moz.build files
 #
   'base': """
-if CONFIG['GNU_CXX']:
+if CONFIG['CC_TYPE'] in ('clang', 'gcc'):
     CXXFLAGS += [
         '-Wno-attributes',
         '-Wno-shadow',
         '-Wno-sign-compare',
         '-Wno-unknown-pragmas',
         '-Wno-unreachable-code',
+        '-Wno-missing-braces',
     ]
-    if CONFIG['CLANG_CXX']:
+    if CONFIG['CC_TYPE'] == 'clang':
         CXXFLAGS += [
             '-Wno-inconsistent-missing-override',
             '-Wno-unused-private-field',
@@ -39,6 +40,9 @@ if CONFIG['GNU_CXX']:
             '-Wno-shadow-compatible-local',
             '-Wno-shadow-local',
         ]
+
+if CONFIG['CC_TYPE'] in ('msvc', 'clang-cl'):
+    CXXFLAGS += ['-wd5038'] # C5038: initializer list order warnings
 
 if CONFIG['MOZ_DIRECTX_SDK_PATH'] and not CONFIG['MOZ_HAS_WINSDK_WITH_D3D']:
     LOCAL_INCLUDES += ['%' + '%s/include/' % CONFIG['MOZ_DIRECTX_SDK_PATH']]
@@ -78,10 +82,10 @@ DEFINES['ANGLE_ENABLE_KEYEDMUTEX'] = "1"
 EXPORTS.angle += [ 'include/GLSLANG/ShaderLang.h', 'include/GLSLANG/ShaderVars.h', 'include/platform/Platform.h' ]
 EXPORTS.angle.KHR += [ 'include/KHR/khrplatform.h' ]
 
-LOCAL_INCLUDES += [ 'include', 'src', 'src/common/third_party/numerics' ]
+LOCAL_INCLUDES += [ 'include', 'src', 'src/common/third_party/base', 'src/common/third_party/smhasher' ]
 
 # We allow warnings for third-party code that can be updated from upstream.
-ALLOW_COMPILER_WARNINGS = True
+AllowCompilerWarnings()
 
 FINAL_LIBRARY = 'gkmedias'
 """,
@@ -90,7 +94,7 @@ FINAL_LIBRARY = 'gkmedias'
 #
   'libANGLE': """
 
-LOCAL_INCLUDES += [ '../../include', '../../src', '../../src/common/third_party/numerics', '../../src/third_party/khronos', '../../src/third_party/mrucache' ]
+LOCAL_INCLUDES += [ '../../include', '../../src', '../../src/common/third_party/base', '../../src/common/third_party/smhasher', '../../src/third_party/khronos' ]
 
 DEFINES['LIBANGLE_IMPLEMENTATION'] = "1"
 DEFINES['ANGLE_ENABLE_HLSL'] = "1"
@@ -118,7 +122,7 @@ if CONFIG['MOZ_HAS_WINSDK_WITH_D3D']:
     SOURCES['renderer/d3d/d3d11/SwapChain11.cpp'].flags += ['-DANGLE_RESOURCE_SHARE_TYPE=D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX']
 
 # We allow warnings for third-party code that can be updated from upstream.
-ALLOW_COMPILER_WARNINGS = True
+AllowCompilerWarnings()
 
 """,
 #
@@ -126,7 +130,7 @@ ALLOW_COMPILER_WARNINGS = True
 #
   'libGLESv2': """
 
-LOCAL_INCLUDES += [ '../../include', '../../src', '../../src/common/third_party/numerics', '../../src/third_party/khronos' ]
+LOCAL_INCLUDES += [ '../../include', '../../src', '../../src/common/third_party/base', '../../src/common/third_party/smhasher', '../../src/third_party/khronos' ]
 
 DEFINES['LIBANGLE_IMPLEMENTATION'] = "1"
 DEFINES['ANGLE_ENABLE_HLSL'] = "1"
