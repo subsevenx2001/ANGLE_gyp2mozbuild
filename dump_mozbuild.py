@@ -90,7 +90,7 @@ def GenerateOutput(target_list, target_dicts, data, params):
     target_sources = target_dicts[target].get('sources')
     if target_sources:
       for source in target_sources:
-        if source.endswith('.cpp'):
+        if source.endswith('.cpp') or source.endswith('.cc'):
           #print "   %s" % source
           sources.append(source)
 

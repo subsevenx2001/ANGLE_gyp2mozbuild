@@ -191,11 +191,12 @@ relative_dir = None
 # play nicely with other files
 nonunified_source_files = [
   "HLSLCompiler.cpp",
+  "blocklayout.cpp",
+  "ExpressionParser.cpp",
   # generated parsers
   "glslang_tab.cpp",
   "glslang_lex.cpp",
   "Display.cpp",
-  "SwapChain11.cpp"
   "NativeWindow11Win32.cpp", # because of include <initguid.h>
   "EmulateGLFragColorBroadcast.cpp", # because of redefinition of "constructIndexNode"
   "FramebufferGL.cpp",
@@ -206,6 +207,8 @@ nonunified_source_files = [
   "SwapChain11.cpp",
   "SystemInfo.cpp",
   "SystemInfo_win.cpp",
+  "ValidateOutputs.cpp",
+  "VariablePacker.cpp",
   "copyimage.cpp",
   "imageformats.cpp",
   "loadimage.cpp",
